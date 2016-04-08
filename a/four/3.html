@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="utf-8">
+	<title>简易的时钟</title>
+	<style>
+		body,
+		div {
+			margin: 0;
+			padding: 0;
+		}
+		body { color: #FFF; }
+		#dClock {
+			margin: 10px auto;
+			width: 300px;
+			text-align: center;
+			background-color: #15A05C;
+			padding: 10px 0;
+			position: relative;
+		}
+		#dClock span {
+			width: 90px;
+			border: 2px solid #ccc;
+			line-height: 40px;
+			background-color: #fbfbfb;
+			margin: 0 10px;
+			padding: 0 10px;
+			color: #000000;
+		}		
+	</style>
+</head>
+<body>
+<div id="dClock">
+	<span></span>:<span></span>:<span></span>
+</div>
+<script>
+	window.onload=function(){
+		var oC=document.getElementById("dClock");
+		var oSpan=document.getElementsByTagName("span");
+		setInterval(getTimes,1000);
+		getTimes();
+		function getTimes(){
+			//创建一个时间对象
+			var oDate=new Date();
+			//获得时分秒数组
+			var aDate=[oDate.getHours(),oDate.getMinutes(),oDate.getSeconds()];
+			for (var i in aDate){
+				oSpan[i].innerHTML=format(aDate[i]);
+			}
+		};
+		//2位数以下的数字之前补0
+		function format(a){
+			return a.toString().replace(/^(\d)$/,"0$1");
+		}
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="utf-8">
+	<title>Div闪烁</title>
+	<style>
+			#share {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin: -100px 0 0 -100px;
+			text-align: center;
+			background-color: #FE0000;
+			width: 200px;
+			height: 200px;
+			color: #FFF;
+			cursor: pointer;
+			letter-spacing: 5px;
+			font: 14/200px;
+		}
+	</style>
+</head>
+<body>
+<div id="share">点击闪烁</div>
+<script>
+	window.onload=function(){
+		var oDiv=document.getElementById("share");
+		var timer=null;//变量时间
+		oDiv.onclick=function(){
+			var i=0;//定义
+			clearInterval(timer);
+			timer=setInterval(function(){
+				oDiv.style.display=i++%2?"none":"block";
+				i>8&&(clearInterval(timer));
+			},100)
+		}
+	}
+</script>
+</body>
+</html>

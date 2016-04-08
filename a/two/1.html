@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+	<title>点击div，显示其内容</title>
+	<style>
+       body {
+       	font-size: 14px;
+       	font-family: "Microsoft YaHei","微软雅黑";
+       	margin: 0;
+       	padding: 0;
+       }
+       #menu {
+       	margin: 10px auto;
+       	width: 450px;
+       	text-indent: 2em;
+       }
+       #menu div {
+       	border: 1px solid #ccc;
+       	margin-top: 10px;
+       	padding: 5px;
+       	cursor: pointer;
+       }
+	</style>
+</head>
+<body>
+<div id="menu">
+	<div><strong>窗外有雨，</strong>不是我想要的天气。就那样淅淅沥沥着，让春也就渐渐的深了。还记得，那年，那个雨季，你从我的身边轻轻走过，宛若一抹惊鸿，潋滟了我生命的苍白。</div>
+	<div>回首那时，年华静美，只一眼便似千年。我眼波带醉，赠你一世温柔，海枯石烂不分离。任凭那些倒扣在流年深处的寂寞，在一缕淡淡的荷香里生根，发芽。尔后，开成荷的模样，日日为你倾城。感动着，在岁月的轮回里，牵手走过忘川，将<strong>丝丝缕缕</strong>捻成一曲清歌。这个春天，我愿踏一季芳菲，采一笺柳色。将所有的缱绻，种在记忆的梗上。只为，永远记得，我们来过彼此的世界。</div>
+	<div>陌上，风生水起。聚过，散过。渐渐习惯，一个人在暖暖的午后。围一圈篱笆，种一地黄花。期待，你经过的瞬间，可以一下子就想起我。很多次，我把自己丢在风里。希望穿过茫茫人海，可以与你<strong style="color:#BD2D30;">邂逅</strong>。期待，夕阳西下时刻，把我的手给你，让你领我去更远的远方，走进更深的春天。</div>
+</div>
+<script>
+      window.onload=function(){
+            var oDiv=document.getElementById("menu").getElementsByTagName("div");
+            for (var i = 0; i < oDiv.length; i++) {
+                  oDiv[i].onclick=function(){
+                        alert(this.innerHTML);
+                  }
+            };
+      }
+</script>
+</body>
+</html>

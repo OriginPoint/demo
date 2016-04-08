@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="utf-8">
+	<title>拖拽效果</title>
+	<style>
+		body{
+			background: url(img/baidu_demo.png)no-repeat center top #FFF;
+			padding: 0;
+			margin: 0;
+			font-size: 12px;
+			font-family: "Microsoft YaHei";
+		}
+		.ui-dialog{
+			width: 380px;
+			height: auto;
+			position: absolute;
+			z-index: 9000;
+			top: 100px;
+			left: 100px;
+			border: 1px solid #d5d5d5;
+			background: #FFF;
+			display: none;
+		}
+		.ui-dialog .ui-dialog-title{
+			height: 48px;
+			line-height: 48px;
+			padding-left: 20px;
+			font-size: 16px;
+			background: #F7F7F7;
+			color: #666666;
+			border-bottom: 1px solid #EFEFEF;
+			cursor: move;
+		}
+		.ui-dialog-title-closeBtn{
+			width: 16px;
+			height: 16px;
+			display: block;
+			position: absolute;
+			top: 12px;
+			right: 20px;
+			background: url(img/close_def.png);
+		}
+		.ui-dialog-title .ui-dialog-title-closeBtn:hover{
+			background: url(img/close_hov.png);
+		}
+		.link{
+			text-align: right;
+			line-height: 20px;
+			padding-right: 40px;
+		}
+		.link a{
+			font-size: 14px;
+			color: #555555;
+		}
+		.ui-mask{
+			width: 100%;
+			height: 100%;
+			background: #000;
+			opacity: 0.4;
+			filter:alpha(opacity: 40);/*IE滤镜*/
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 8000;
+			display: none;
+		}
+		.ui-dialog .ui-dialog-content{
+			padding: 15px 20px;
+		}
+		.ui-dialog-pt15{
+		    padding-top: 15px;
+		}
+		.ui-dialog-l40{
+			height: 40px;
+			line-height: 40px;
+			text-align: right;
+		}
+
+		.ui-dialog-input{
+			width: 100%;
+			height: 40px;
+			margin: 0px;
+			padding:0px;
+			border: 1px solid #d5d5d5;
+			font-size: 16px;
+			color: #c1c1c1;
+			text-indent: 25px;
+			outline: none;
+		}
+		.ui-dialog-input-username{
+			background: url(img/input_username.png) no-repeat 2px ;
+		}
+
+		.ui-dialog-input-password{
+			background: url(img/input_password.png) no-repeat 2px ;
+		}
+		.ui-dialog-submit{
+			width: 100%;
+			height: 50px;
+			background: #3b7ae3;
+			border:none;
+			font-size: 16px;
+			color: #fff;
+			outline: none;
+			text-decoration: none;
+			display: block;
+			text-align: center;
+			line-height: 50px;
+		}
+		.ui-dialog-submit:hover{
+			background: #3f81b0;
+		}
+	</style>
+</head>
+<body>
+	<div class="link">
+		<a href="javascript:showDialog();">登录</a>
+	</div>
+		<!--遮罩 防止选中-->
+		<div class="ui-mask" id="mask" onselectstart="return false"></div>
+	<div class="ui-dialog" id="dialog">
+		<div class="ui-dialog-title" id="dialogTitle">
+			登录通行证
+			<a href="javascript:hideDialog();" class="ui-dialog-title-closeBtn"></a>
+		</div>
+		<div class="ui-dialog-content">
+		<div class="ui-dialog-l40 ui-dialog-pt15">
+		<input class="ui-dialog-input ui-dialog-input-username" id="ui-dialog-username"  type="input" value="手机/邮箱/用户名" />
+		</div>
+		<div class="ui-dialog-l40 ui-dialog-pt15">
+			<input class="ui-dialog-input ui-dialog-input-password" id="ui-dialog-password"  type="input" value="密码" />
+		</div>
+		<div class="ui-dialog-l40">
+			<a href="javascript:;">忘记密码</a>
+		</div>
+		<div>
+			<a class="ui-dialog-submit" href="#" >登录</a>
+		</div>
+		<div class="ui-dialog-l40">
+			<a href="javascript:;">立即注册</a>
+		</div>
+		</div>
+	</div>
+	<script>
+		//获取元素对象
+		function g(id){
+			return document.getElementById(id);
+		}
+		var dEleW=document.documentElement.clientWidth;
+		var dEleH=document.documentElement.clientHeight;
+		//自动居中
+		function autoCenter(ele){
+			var dialogW=dEleW;
+			var dialogH=dEleH;
+
+			var eleW=ele.offsetWidth;
+			var eleH=ele.offsetHeight;
+
+			ele.style.left=(dialogW-eleW)/2+'px';
+			ele.style.top=(dialogH-eleH)/2+'px';
+		}
+		//遮罩
+		function fillToBody(ele){
+			ele.style.width=dEleW+'px';
+			ele.style.height=dEleH+'px';
+		}
+		var mouseOffsetX=0;//偏移
+		var mouseOffsetY=0;
+		var isFlag=false;//标记是否可拖动
+		//1.0 addEventListener API
+			g('dialogTitle').addEventListener('mousedown',function(e){
+				var e=e||window.event;
+				mouseOffsetX=e.pageX-g('dialog').offsetLeft;
+				mouseOffsetY=e.pageY-g('dialog').offsetTop;
+				isFlag=true;
+			});
+		//2.0
+		document.onmousemove=function(){
+			var e=e||window.event;
+			var mouseX=e.pageX;
+			var mouseY=e.pageY;
+			var moveX=0;
+			var moveY=0;
+			if (isFlag===true) {
+				moveX=mouseX-mouseOffsetX;
+				moveY=mouseY-mouseOffsetY;
+				//范围限定
+				var pageW=dEleW;//页面
+				var pageH=dEleH;
+				var dialogWidth=g('dialog').offsetWidth;//浮层
+				var dialogHeight=g('dialog').offsetHeight;
+				var maxX=pageW-dialogWidth;
+				var maxY=pageH-dialogHeight;
+				moveX=Math.min(maxX,Math.max(0,moveX));
+				moveY=Math.min(maxY,Math.max(0,moveY));
+				g('dialog').style.left=moveX+'px';
+				g('dialog').style.top=moveY+'px';
+			}
+		}
+		//3.0
+		document.onmouseup=function(){
+			isFlag=false;
+		}
+		//打开登录浮层
+		function showDialog(){
+			g('dialog').style.display="block";
+			g('mask').style.display="block";
+			autoCenter(g('dialog'));
+			fillToBody(g('mask'));
+		}
+		//关闭
+		function hideDialog(){
+			g('dialog').style.display="none";
+			g('mask').style.display="none";
+
+		}
+		window.onresize=function(){
+			autoCenter(g('dialog'));
+			fillToBody(g('mask'));
+		}	
+		//4.0点击输入框改变
+		function uName(value){
+			if (value==null) {
+				 this.value="";
+			}else{
+				this.value=value;
+			}
+		}
+		var txtPassword=g("ui-dialog-password");
+		var txtUsername=g("ui-dialog-username");
+		txtPassword.onfocus=function(){
+			uName(this.value="");
+		}
+		txtUsername.onfocus=function(){
+			uName(this.value="");
+		}
+		txtPassword.onblur=function(){
+			uName(this.value="密码");
+		}
+		txtUsername.onblur=function() {
+			uName(this.value="手机/邮箱/用户名");
+		}
+	</script>
+</body>
+</html>

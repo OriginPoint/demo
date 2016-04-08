@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<title>抽奖小游戏</title>
+	<style>
+	body,
+		div {
+			margin: 0;
+			padding: 0;
+		}
+		body { font-size: 12px; }
+		.title {
+			width: 400px;
+			height: 70px;
+			font-size: 24px;
+			color: #DC0202;
+			margin: 0 auto;
+			padding-top: 20px;
+			font-weight: bold;
+			text-align: center;
+		}
+		.btns {
+			width: 190px;
+			height: 30px;
+			margin: 0 auto;
+		}
+		.btns span {
+			display: block;
+			float: left;
+			width: 80px;
+			height: 24px;
+			line-height: 24px;
+			text-align: center;
+			background-color: #003366;
+			border: 1px solid #ccc;
+			border-radius: 7px;
+			margin-right: 10px;
+			font: bold 16px/18px "Microsoft YaHei";
+			cursor: pointer;
+			color: #FFF;
+
+		}
+		.title-p {
+			margin: 0 auto;
+		}
+		div p {
+			font-size: 18px;
+			text-align: center;
+			color: #EF0000;
+		}
+		</style>
+	</style>
+</head>
+<body>
+<div  class="title" id="title">开始抽奖</div>
+<div class="btns">
+	<span id="start">开 始</span>
+	<span id="stop">结 束</span>
+</div>
+<div class="title-p"><p>可以使用Enter键位来开始和结束</p></div>
+<script>
+		//数组
+		var data=['Ipad','三星笔记本','谢谢参与','10元充值卡','1000元代金卷','iPhone 6s','5元充值卡','50元充值卡','100元充值卡','谢谢参与'];		
+		window.onload=function(){
+		var play=document.getElementById("start"),stop=document.getElementById("stop");
+		timer=null;
+		flag=0;
+		//开始抽奖
+			stop.onclick=function(){
+				if (flag==0) {
+					clearInterval(timer);
+				}else{
+					stop.onclick=stopFun;
+				}
+			}
+			play.onclick=playFun;
+		function playFun(){
+			var title=document.getElementById("title");
+			clearInterval(timer);//清除之前的动作
+			timer=setInterval(function(){
+				var random=Math.floor(Math.random()*data.length);
+				title.innerHTML=data[random];
+			},50);
+			play.style.background='#ccc';
+			stop.style.background='#EF0000';
+		}
+		function stopFun(){
+			clearInterval(timer);
+			play.style.background='#018F01';
+			play.style.color="#FFF";
+			stop.style.background="#ccc";
+		}
+		//键盘事件
+		document.onkeyup=function(){
+			event=event||window.event;
+			//13键盘码是enter键,想要其实键位alert(event.keyCode)
+			if (event.keyCode==13) {
+				if (flag==0) {
+					playFun();
+					flag=1;
+				}else{
+					stopFun();
+					flag=0;
+				}
+			}
+		}
+	}
+</script>
+</body>
+</html>

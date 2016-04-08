@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>回到顶部</title>
+	<style>
+		body{
+			margin: 0;
+			padding: 0;
+		}
+		.box{
+			width: 1190px;
+			margin: 0 auto;
+		}
+		#btn{
+			width: 40px;
+			height: 80px;
+			position: fixed;
+			left: 50%;
+			margin-left: 610px;
+			bottom: 30px;
+			background: url(img/top_bg.png) no-repeat center;
+			display: none;
+		}
+		#btn:hover{
+			background: url(img/top_bg.png) no-repeat left -40px;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<img src="img/tb_bg.jpg" alt="背景图片">
+	</div>
+	<a id="btn" title="回到顶部" href="javascript:;"></a>
+	<script>
+		window.onload=function(){
+			var oBtn=document.getElementById("btn");
+			var timer=null;//定时器
+			var isTop=true;
+			//可视区高度
+			var clientH=document.documentElement.clientHeight;
+			window.onscroll=function(){
+				//隐藏和显示
+					var oTop=document.documentElement.scrollTop||document.body.scrollTop;
+					if (oTop>=clientH) {
+						oBtn.style.display="block";
+					}else{
+						oBtn.style.display="none";
+					}
+				if (!isTop) {
+					clearInterval(timer);
+				}
+				isTop=false;
+			}
+			//绑定事件
+			oBtn.onclick=function(){
+				timer=setInterval(function(){
+					var oTop=document.documentElement.scrollTop||document.body.scrollTop;
+					var speed=Math.floor(-oTop/5);
+				document.documentElement.scrollTop=document.body.scrollTop =oTop+speed;
+				isTop=true;
+				if (oTop==0) {
+				clearInterval(timer);
+				}
+				},30);
+				
+			}
+		}
+	</script>
+</body>
+</html>

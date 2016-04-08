@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+ 	<meta charset="utf-8">
+	<title>循环将DIV变色</title>
+	<style>
+ 		#menu {
+ 			width: 330px;
+ 			height: 100px; 			
+ 			margin: 10px auto;
+ 		}
+ 		#menu div {
+ 			float: left;
+ 			width: 100px;
+ 			height: 100px;
+ 			margin: 0 5px;
+ 			background: #000;
+ 		}
+	</style>
+</head>
+<body>
+<center><input class="button" type="button" value="点击变色" /></center>
+<div id="menu">
+	<div></div>
+	<div></div>
+	<div></div>
+</div>
+<script>
+	window.onload=function(){
+    	var oDiv=document.getElementById("menu").getElementsByTagName("div");
+    	var oInput=document.getElementsByTagName("input")[0];
+    	oInput.onclick=function(){
+    		for (var i = 0; i < oDiv.length; i++) {
+    		oDiv[i].style.background="red";
+    	};
+    }
+}
+</script>
+</body>
+</html>

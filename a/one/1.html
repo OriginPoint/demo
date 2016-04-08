@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+	<title>控制div属性</title>
+	<style>
+  body{ background-color: #FFF; }
+  #div_box {
+  	margin: 0 auto;
+  	width: 400px;
+  	padding: 0;
+  	text-align: center;
+  }
+  #div_box_demo {
+  	width: 100px;
+  	height: 100px;
+  	margin: 10px auto;
+  	background-color: #88bbcc;
+  }
+	</style>
+</head>
+<body>
+<div id="div_box">
+	<input type="button" value="变宽" onClick="btnW()">
+	<input type="button" value="变色" onClick="btnC()">
+	<input type="button" value="隐藏" onClick="btnHide()">
+	<input type="button" value="显示" onClick="btnShow()">
+	<input type="button" value="重置" onClick="btnReset()">
+	<div id="div_box_demo"></div>
+</div>
+<script>
+		var btn=document.getElementById("div_box_demo");
+		function btnW(){
+			btn.style.width="200px";
+			btn.style.height="200px";           
+		}
+		function btnC(){
+		  btn.style.backgroundColor="red";
+		}
+		function btnHide(){
+			btn.style.display="none";
+		}
+		function btnShow(){
+			btn.style.display="block";
+		}
+		function btnReset(){
+			var message=confirm("确定要重置?");
+			if(message==true){
+				btn.removeAttribute('style');
+			}
+		}
+</script>
+</body>
+</html>

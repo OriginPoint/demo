@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="utf-8">
+	<title>网页换肤</title>
+	<link href="link/blue.css" rel="stylesheet" type="text/css">
+	<style>
+      body,
+      ul,
+      li {
+      	margin: 0;
+      	padding: 0;
+      }
+      body { font: 14px/1.5; }
+       li { list-style-type: none; }
+      a:link,
+      a:visited {
+      	text-decoration: none;
+      }
+      a:hover { text-decoration: underline; }
+      .div1 {
+      	display: block;
+      	width: 400px;
+      	margin: 0 auto;
+      	overflow: hidden;
+      	zoom: 1;
+      }
+     .skin,
+     .menu {
+     	overflow: hidden;
+     	zoom: 1;
+     }     
+      .skin { margin: 10px 0; }
+      .skin li {
+      	width:10px;      
+      	float: left;
+      	height:10px;
+      	cursor: pointer;
+      	overflow: hidden;
+      	margin-right: 10px;      	
+      	text-indent: -9999px;
+      	border-width: 4px;
+      	border-style: solid;
+      }
+      .skin li.current { background-color: #FFF!important; }
+      #red {
+      	background-color: red;
+      	border-color: red;
+      }
+      #gray {
+      	background-color: gray;
+      	border-color: gray;
+      }
+      #black {
+      	background-color: black;
+      	border-color: black;
+      }
+      #blue {
+      	background-color: blue;
+      	border-color: blue;
+      }
+      #yellow {
+      	background-color: yellow;
+      	border-color: yellow;
+      }
+      .menu { border: 1px solid gray; }
+      .menu li {
+      	width: 78px;
+      	float: left;
+        text-align: center;
+      	line-height: 25px;
+      	list-style-type: none;
+      }
+      .menu li.last {
+      	width: 79px;
+      	border-right-width: 0;
+      }
+      .menu li a { color:#fff; }
+	</style>
+</head>
+<body>
+<div class="div1">
+	<ul class="skin" id="skin">
+		<li id="red" title="红色"></li>
+		<li id="gray" title="灰色"></li>
+		<li id="black" title="黑色"></li>
+		<li class="current" id="blue" title="蓝色"></li>
+		<li id="yellow" title="黄色"></li>
+	</ul>
+	<ul class="menu">
+		<li><a href="javascript:;">新闻</a></li>
+		<li><a href="javascript:;">时讯</a></li>
+		<li><a href="javascript:;">体育</a></li>
+		<li><a href="javascript:;">艺术</a></li>
+		<li class="last"><a href="javascript:;" >综艺</a></li>
+	</ul>
+</div>
+<script>
+	window.onload=function(){
+       var oLink=document.getElementsByTagName("link")[0];
+       var oSkin=document.getElementById("skin").getElementsByTagName("li");
+       for (var i = 0; i < oSkin.length; i++) {
+       	oSkin[i].onclick=function(){
+       		for(var x in oSkin){
+       			oSkin[x].className="";
+       			this.className="current";
+       			oLink['href']="link/"+this.id+".css";
+       		}
+       	};
+    }
+};
+</script>
+</body>
+</html>

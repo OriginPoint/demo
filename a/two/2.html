@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="utf-8">
+	<title>求出数组中所有数的和</title>
+	<style>
+     body {
+     	font-size: 14px;
+     	background-color: #FFF;
+     	font-family: "Microsoft YaHei","微软雅黑";
+     }
+     .br { display: block; }
+     #menu {
+     	margin: 10px auto;
+     	width: 500px;
+     }
+     span { color: #ccc; }
+     .btn-1 {
+     	margin-top: 20px;
+     	text-align: center;
+     }
+     .sum {
+     	color: #FE0000;
+     	font-size: 20px;
+     }
+	</style>
+</head>
+<body>
+<div id="menu">
+<input  id="txt" type="text">
+<span>输入整数求和，数字之间用半角“,”分隔</span>
+<input class="btn-1 br" id="btn" type="button" value="求和">
+<strong class="sum"></strong>
+</div>
+<script>
+     window.onload=function(){
+          var oBtn=document.getElementById("btn");
+          var oInput=document.getElementById("txt");
+          var oStr=document.getElementsByTagName("strong")[0];
+          function isDigit(s) { 
+               var patrn=/^[0-9]{1,20}$/; 
+               if (!patrn.exec(s)){
+                    return false;
+               }
+               else{
+                    return true;
+               }
+     } 
+          oInput.onkeyup=function(){
+               isDigit(this);
+          this.value=this.value.replace(/[^(\d)|(,)]/,"");            
+          }
+     //鼠标点击事件
+          oBtn.onclick=function(){
+          var sum=0;
+          var oInput=document.getElementsByTagName("input")[0].value.split(",");
+          for (var i in oInput) {
+               sum+=parseInt(oInput[i]);
+          };
+          oStr.innerHTML=sum;
+          }
+     }         
+</script>
+</body>
+</html>

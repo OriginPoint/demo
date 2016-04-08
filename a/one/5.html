@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="utf-8">
+	<title>放大缩水图片</title>
+	<style>
+		body{
+			margin: 0;
+			padding: 0;
+		}
+		.box{
+			width: 400px;
+			margin: 10px auto;
+		}
+	</style>
+</head>
+<body>
+<div class="box">
+	<img id="imgA" src="image/7.jpg" alt="图片"><br>
+<input id="btnBig" type="button" value="放大">
+<input id="btnSmall" type="button" value="缩小">
+</div>
+<script>
+	//等待加载完成
+	window.onload=function(){
+		var maxBtn=document.getElementById("btnBig");
+		var minBtn=document.getElementById("btnSmall");
+		var img=document.getElementById("imgA");
+		var maxW=img.width*2;//放大极限值
+		var minW=img.width*0.5;//缩小极限值
+		maxBtn.onclick=function(){
+			maxFunc();
+		}
+		//放大
+		function maxFunc(){
+			var imgW=img.width*1.3;//每次点击的宽度
+			var timer=setInterval(function(){
+				if (img.width<imgW) {
+					if (img.width<maxW) {
+				img.width=img.width*1.05;
+				img.height=img.height*1.05;
+			}else{
+				alert("已经放大到最大值");
+				clearInterval(timer);
+			}
+			}else{
+
+				clearInterval(timer);
+			}
+			},100);
+		}
+		minBtn.onclick=function(){
+			minFunc();
+		}
+		//缩小
+		function minFunc(){
+			var imgW=img.width*0.7;//每次点击的宽度
+			var timer=setInterval(function(){
+				if (img.width>imgW) {
+					if (img.width>minW) {
+				img.width=img.width*0.95;
+				img.height=img.height*0.95;
+			}else{
+				alert("已经缩小到最小值");
+				clearInterval(timer);
+			}
+			}else{
+
+				clearInterval(timer);
+			}
+			},100);
+		}
+	}
+</script>
+</body>
+</html>

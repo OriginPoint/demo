@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+	<title>伸缩菜单</title>
+	<style>
+         body,
+         a,
+         ul {
+         	margin: 0;
+         	padding: 0;
+         	font-size: 14px;
+         } 
+         a {
+         	color: #333;
+         	text-decoration: none;
+         }
+         .ul_list {
+         	height: 30px;
+         	border-bottom: 5px solid #f60;
+          margin-top: 20px;
+          padding-left: 50px;
+          list-style-type: none;
+         }
+         .ul_list li { float: left; }
+         .ul_list li a {
+         	display: block;
+         	text-align: center;
+         	height: 30px;
+         	line-height: 30px;
+         	width: 80px;
+         	background-color: #efefef;
+         	margin-left: 1px;
+         }
+         .ul_list li a.active,
+         .ul_list li a:hover {
+          background: #F60;
+          color: #fff;
+        }
+	</style>
+</head>
+<body>
+ <ul class="ul_list">
+ 	<li><a href="#" class="active">首页</a></li>
+ 	<li><a href="#">新闻快讯</a></li>
+ 	<li><a href="#">产品展示</a></li>
+ 	<li><a href="#">售后服务</a></li>
+ 	<li><a href="#">联系我们</a></li>
+ </ul>
+ <script>
+    window.onload=function(){
+      tm=20;
+      var oul=document.getElementsByTagName('ul')[0];
+       var alist=oul.getElementsByTagName('a');
+       for (var i = 0; i < alist.length; i++) {
+        alist[i].onmouseover=function(){
+          if(this.className!="active"){
+            clearInterval(this.timer);
+            var t=this;           
+            t.timer=setInterval(function(){
+                      t.style.width=t.offsetWidth+8+"px";
+                      if(t.offsetWidth>=120){
+                        clearInterval(t.timer);
+                        }
+            },tm)
+          }
+        }
+          alist[i].onmouseout=function(){
+          if(this.className!="active"){
+            clearInterval(this.timer);
+            var t=this;           
+            this.timer=setInterval(function(){
+                      t.style.width=t.offsetWidth-8+"px";
+                      if(t.offsetWidth<=80){
+                        t.style.width='80px';
+                        clearInterval(t.timer);
+                        }
+            },tm)
+          }
+        }
+       }
+}
+  </script>
+</body>
+</html>

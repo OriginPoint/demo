@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="utf-8">
+	<title>新手引导效果</title>
+</head>
+<style type="text/css">
+	html{
+		height: 100%;
+	}
+	body,div,span {
+		margin: 0;
+		padding: 0;
+	}
+	body {
+		background: url(images/body.png) center top;
+		height:100%;
+	}
+	/*mask蒙版*/
+	#mask {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		opacity: 0.5;
+		filter: alpha(opacity=50);
+		display: none;
+		background: #000;
+	}
+	#search{
+		width: 980px;
+		height: 800px;
+		position: absolute;
+		left: 50%;
+		margin-left: -490px;
+		display: none;
+	}
+	#search div{
+		position: absolute;
+		display: none;
+	}
+	#search div a{
+		position: absolute;
+		width: 95px;
+		height: 32px;
+		text-indent: -999px;
+		overflow: hidden;
+		cursor: pointer;
+	}
+	#search div span{
+		position: absolute;
+		width: 30px;
+		height: 30px;
+		text-indent: -999px;
+		overflow: hidden;
+		cursor: pointer;
+	}
+	/*定位每个图片位置*/
+	#search .stepA{
+		width: 745px;
+		height: 329px;
+		background: url(images/guide11.png);
+		top: 130px;
+		left: -9px;
+	}
+	.stepA a{
+		top: 231px;
+		left: 490px;
+	}
+	.stepA span{
+		top: 144px;
+		left: 683px;
+	}
+	#search .stepB{
+		background:url(images/guide21.png); 
+		width:647px;
+		height:405px;
+		top:2px;
+		left:324px;
+	}
+	.stepB a{
+		top:308px; 
+		left:146px;
+	}
+	.stepB span{
+		top:196px;
+		right:285px;
+	}
+	#search .stepC{
+		background:url(images/guide31.png);
+		width:654px;
+		height:257px;
+		top:294px;
+		left:318px;
+	}
+	.stepC a{
+		top:155px;
+		left:400px;
+	}
+	.stepC span{
+		top:44px;
+		right:35px;
+	}
+	#search .stepD{
+		background:url(images/guide41.png);
+		width:558px;
+		height:348px;
+		top:78px;
+		left:155px;
+	}
+	.stepD a{
+		top:246px;
+		left:304px;
+	}
+	.stepD span{
+		top:135px;
+		right:35px;
+	}
+	#search .stepE{
+		background:url(images/guide51.png);
+		width:397px;
+		height:342px;
+		top:79px;
+		left:250px;
+	}
+	.stepE a{
+		top:245px;
+		left:153px;
+	}
+</style>
+<body>
+<div id="mask"></div>
+	<div id="search">
+		<div class="stepA"><a>下一步</a><span title="关闭">关闭</span></div>
+		<div class="stepB"><a>下一步</a><span title="关闭">关闭</span></div>
+		<div class="stepC"><a>下一步</a><span title="关闭">关闭</span></div>
+		<div class="stepD"><a>下一步</a><span title="关闭">关闭</span></div>
+		<div class="stepE"><a>下一步</a></div>
+	</div>
+<script>
+	window.onload=function(){
+		var oMask=document.getElementById("mask");
+		var oSearch=document.getElementById("search");
+		var oStep=oSearch.getElementsByTagName("div");
+		var oA=oSearch.getElementsByTagName("a");
+		var oClose=oSearch.getElementsByTagName("span");
+		//读取cookie
+		var res=document.cookie.substring(5);
+		//演示
+		alert("当前cookie:"+"("+res+")");
+		//没有cookie 执行以下操作
+		if(res!="www.123.com"){
+			alert("没有登录过");
+		//mask
+		oMask.style.display=oSearch.style.display=oStep[0].style.display='block';
+		//下一步
+		for (var i = 0; i < oStep.length; i++) {
+			oA[i].index=i;
+			oA[i].onclick=function(){
+				this.parentNode.style.display="none";
+				//判断最后一个按钮
+				if (this.index<oStep.length-1) {
+				oStep[this.index+1].style.display="block";
+				}
+				else if(this.index==oStep.length-1){
+					oMask.style.display=oSearch.style.display="none";
+				}
+			}
+		}
+		
+	}
+		//关闭
+		for (var i = 0; i < oClose.length; i++) {
+				oClose[i].onclick=function(){
+				oMask.style.display=oSearch.style.display="none";
+			}
+		}
+		//cookie      expires过期
+		var oDate=new Date();
+		//过期时间1天
+		oDate.setDate(oDate.getDate()+1);
+		document.cookie="name=www.123.com;expires="+oDate;
+	}
+</script>
+</body>
+</html>

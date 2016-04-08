@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>全屏滚动效果</title>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.8/jquery.fullPage.min.css">
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			font: 16px/1.8 "Microsoft YaHei",verdana;
+		}
+		.section{
+			background-color: #FFF;
+			overflow: hidden;
+			text-align: center;
+		}
+		h1,p{
+			color: #F0F0F0;
+		}
+		.sec1{
+			background: url("img/1.jpg")no-repeat center;
+		}
+		.sec1 h1{
+			font-size: 50px;
+			text-shadow:0 0 .1em,0 0 .3em;
+		}
+		.sec1 p{
+			font-style: oblique;
+		}
+		.sec2{
+			background: url("img/2.jpg")no-repeat center;
+		}
+		.sec2 h1{
+			font-size: 70px;
+			text-shadow: 1px 1px #000,-1px -1px #000,-1px 1px #000,1px -1px #000;
+		}
+		.sec3{
+			background: url("img/3.jpg")no-repeat center;
+		}
+		.sec4{
+			background: url("img/4.jpg")no-repeat center;
+		}
+		.sec4 h1{
+			font-size: 80px;
+		}
+		.sec4 p{
+			font-size: 2em;
+		}
+		.sec4 h1,.sec4 p{
+			color: #000;
+		}
+		.sec4 p span{
+			color: #EDE0D0;
+		}
+		.sec5{
+			background: url("img/5.jpg")no-repeat center;
+		}
+		.sec5 h1{
+			font-size: 70px;
+			text-shadow: 1px 1px #000,2px 2px #000,3px 3px #000,
+						  4px 4px #000,5px 5px #000,6px 6px #000,
+						  7px 7px #000,8px 8px #000;
+		}
+		.sec5 p{
+			font-style: italic;
+		}
+		.sec5 p span{
+			color: #540000;
+		}
+	</style>
+</head>
+<body>
+
+	<div id="fullpage">
+		<div class="section sec1">
+			<h1>Example</h1>
+			<p>南国有佳人，容华若桃李。</p>
+		</div>
+		<div class="section sec2">
+			<h1>Example</h1>
+			<p>枯藤老树昏鸦，小桥流水人家，古道西风瘦马。</p>
+		</div>
+		<div class="section sec3">
+			<h1>Example</h1>
+			<p>绿树村边合,青山郭外斜。</p>
+		</div>
+		<div class="section sec4">
+			<h1>Example</h1>
+			<p>Wenn ich nichts fordre, so mußt du es dulden,</p>
+			<p>Was ich an Opferrauch für dich ersann;</p>
+			<p>Was ich auch leide, ist nicht dein Verschulden,</p>
+			<p>Und wenn ich sterbe, so geht's dich nichts an.</p>
+		</div>
+		<div class="section sec5">
+			<h1>Example</h1>
+			<p>Rain is falling all <span>around,</span></p>
+				<p>It falls on field <span>and tree,</span> </p>
+				<p>It rains on the <span>umbrella here,</span></p>
+				<p>And on the ships <span>at sea.</span></p>
+		</div>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.8/jquery.fullPage.min.js"></script>
+	<script>
+		$(function(){
+			$("#fullpage").fullpage({
+				verticalCentered:true,
+				anchors:['page1','page2','page3','page4','page5'],
+				navigation:true,
+				navigationTooltips:['I','AM','W','T','B',],
+				continuousVertical:true
+			});
+		});
+	</script>
+</body>
+</html>
