@@ -70,6 +70,8 @@
 			stop.onclick=function(){
 				if (flag==0) {
 					clearInterval(timer);
+					play.style.background='#018F01';
+					stop.style.background="#ccc";
 				}else{
 					stop.onclick=stopFun;
 				}
