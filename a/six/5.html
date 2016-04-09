@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="utf-8">
+	<title>焦点轮播效果</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			text-decoration: none;
+		}
+		#box{
+			overflow: hidden;
+			width: 600px;
+			height: 400px;
+			margin:50px auto 0 auto;
+			border: 3px solid #000;
+			position: relative;
+		}
+		#box-img{
+			width: 4800px;
+			height: 400px;
+			position: absolute;
+			z-index: 1;
+		}
+		#box-img img{
+			float: left;
+		}
+		#box-btn{
+			position: absolute;
+			height: 10px;
+			width: 120px;
+			z-index: 2;
+			bottom: 20px;
+			left: 250px;
+		}
+		#box-btn span{
+			cursor: pointer;
+			float: left;
+			border: 1px solid #ccc;
+			border-radius: 50%;
+			width: 10px;
+			height: 10px;
+			background: #333;
+			margin-right: 5px;
+		}
+		#box-btn .on{
+			background: #E44A26;
+		}
+		.arrow{
+			cursor: pointer;
+			display: none;
+			line-height: 39px;
+			text-align: center;
+			font-size: 36px;
+			font-weight: bold;
+			width: 40px;
+			height: 40px;
+			position: absolute;
+			z-index: 2;
+			top: 180px;
+			background: rgba(0,0,0,.3);
+			color: #FFF;
+		}
+		.arrow:hover{
+			background: rgba(0,0,0,.7);
+		}
+		#box:hover .arrow{
+			display: block;
+		}
+		#prev{
+			left: 20px;
+		}
+		#next{
+			right: 20px;
+		}
+		p{
+			text-align: center;
+			color: #EF0000;
+			margin-top: 20px;
+			font-size: 18px;
+		}
+	</style>
+</head>
+<body>
+<div id="box">
+	<div id="box-img" style="left: -600px">
+		<img src="img/1995.jpg" alt="1">
+		<img src="img/1990.jpg" alt="1">
+		<img src="img/1991.jpg" alt="2">
+		<img src="img/1992.jpg" alt="3">
+		<img src="img/1993.jpg" alt="4">
+		<img src="img/1994.jpg" alt="5">
+		<img src="img/1995.jpg" alt="6">
+		<img src="img/1990.jpg" alt="6">
+	</div>
+	<div id="box-btn">
+		<span index="1" class="on"></span>
+		<span index="2"></span>
+		<span index="3"></span>
+		<span index="4"></span>
+		<span index="5"></span>
+		<span index="6"></span>
+	</div>
+	<a class="arrow" id="prev" href="javascript:;">&lt;</a>
+	<a class="arrow" id="next" href="javascript:;">&gt;</a>
+</div>
+<p>每隔3秒自动轮播</p>
+<script>
+	window.onload=function(){
+		//1.0获取id
+		function g(id){
+			return document.getElementById(id);
+		}
+		var oBox=g("box");
+		var oBoxImg=g("box-img");
+		var oBoxBtn=g("box-btn").getElementsByTagName("span");
+		var oPrev=g("prev");
+		var oNext=g("next");
+		var index=1;//圆点
+		var time=300;//位移总时间
+		var interval=50;//位移间隔时间
+		var animated=false;//6.0快速点击状态 加载完在执行下个动画效果
+		var timer;
+		//3.0 圆点滚动
+		function showBoxBtn(){
+			for (var i = 0; i < oBoxBtn.length; i++) {
+				if (oBoxBtn[i].className=="on") {
+					oBoxBtn[i].className="";
+					break;
+				}
+			}
+			oBoxBtn[index-1].className="on";
+		}
+		//2.0点击左右箭头
+		function animate(offset){
+			if (offset==0) {
+				return;
+			}
+			animated=true;
+			var newLeft=parseInt(oBoxImg.style.left)+offset;
+			var speed=offset/(time/interval);//每次的位移量
+			//5.0嵌套 递规
+			function go(){
+				if ((speed<0&&parseInt(oBoxImg.style.left)>newLeft)||(speed>0&&parseInt(oBoxImg.style.left)<newLeft)) {
+					oBoxImg.style.left=parseInt(oBoxImg.style.left)+speed+"px";
+					setTimeout(go,interval);
+				}
+				else{
+					oBoxImg.style.left=newLeft+"px";
+					oBoxImg.style.left=newLeft+'px';
+					if (newLeft>-600) {
+						oBoxImg.style.left=-3600+'px';
+					}
+					if(newLeft<-3600){
+						oBoxImg.style.left=-600+'px';
+					}
+					animated=false;
+				}
+			}
+			go();
+		}
+
+		//7.0自动切换
+			function play(){
+				timer=setInterval(function(){
+					next.onclick();
+				},3000);
+			}
+			function stop(){
+				clearInterval(timer);
+			}
+		oNext.onclick=function(){
+			if (index==6) {
+				index=1;
+			}
+			else{
+				index+=1;
+			}
+			showBoxBtn();
+			if (!animated) {
+				animate(-600);
+			}
+		}
+		oPrev.onclick=function(){
+			if (index==1) {
+				index=6;
+			}
+			else{
+				index-=1;
+			}
+			showBoxBtn();
+			if (!animated) {
+				animate(600);
+			}
+		}
+		//4.0 圆点点击切换
+		for (var i = 0; i < oBoxBtn.length; i++) {
+			   oBoxBtn[i].onclick=function(){
+				//点击当前第一第图片时，不触发事件
+				if (this.className=="on") {
+					return;
+				}
+				var oIndex=parseInt(this.getAttribute("index"));
+				var offset=-600*(oIndex-index);//偏移量
+				index=oIndex;
+				if (!animated) {
+				animate(offset);
+			}
+				showBoxBtn();
+			}
+		}
+		oBox.onmouseover=stop;
+		oBox.onmouseout=play;
+		play();
+	}
+</script>
+</body>
+</html>
