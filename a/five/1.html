@@ -35,10 +35,6 @@
 			left: 0;
 			z-index: 2;
 		}
-		.slider .main .main-i .picture {
-			margin-top: 250px;
-			top: 0;
-		}
 		.slider .main .main-i .caption {
 			position: absolute;
 			top: 30%;
@@ -238,6 +234,7 @@
 			for (var i = 0; i < pictures.length; i++) {
 				pictures[i].style.marginTop=(-1*pictures[i].clientHeight/2)+'px';
 				}
+			pictures.style.top=0;
 		}
 	       //4.定义何时处理幻灯片
 		window.onload=function(){
