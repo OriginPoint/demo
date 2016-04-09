@@ -40,7 +40,8 @@ window.onload=function(){
         {url:'a/six/1.html',title:'仿苹果电脑任务栏菜单'},
         {url:'a/six/2.html',title:'全屏效果(jQuery)'},
         {url:'a/six/3.html',title:'回到顶部'},
-        {url:'a/six/4.html',title:'拖拽效果'}
+        {url:'a/six/4.html',title:'拖拽效果'},
+        {url:'a/six/5.html',title:'焦点轮播图'}
        ]
   ];
   for(var i=0;i<data.length;i++){
