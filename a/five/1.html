@@ -160,6 +160,14 @@
 	</div>
 </div>
 <script>
+	//4.定义何时处理幻灯片
+	window.onload=function(){
+		addSliders();
+		switchSlider(1);
+		setTimeout(function(){
+			movePictures();
+		},10);
+	}
 	//1.定义数组
 	var data=[
 		{img:1,h1:'Creative',h2:'DUET'},
@@ -202,9 +210,7 @@
 		g('template-main').innerHTML=out_main.join('');
 		g('template-ctrl').innerHTML=out_ctrl.join('');
 		//7.增加main-background,去除换幻灯片右边的白边
-		g('template-main').innerHTML+=tpl_main.replace(/{{index}}/g,'{{index}}')
-											  .replace(/{{h2}}/g,data[i].h1)
-											  .replace(/{{h3}}/g,data[i].h2);
+		g('template-main').innerHTML+=tpl_main.replace(/{{index}}/g,'{{index}}').replace(/{{h2}}/g,data[i].h1).replace(/{{h3}}/g,data[i].h2);
 		g('main-{{index}}').id='main-i-background';
 		}
 		//5.幻灯片切换
@@ -236,15 +242,7 @@
 			for (var i = 0; i < pictures.length; i++) {
 				pictures[i].style.marginTop=(-1*pictures[i].clientHeight/2)+'px';
 				}
-		}
-		//4.定义何时处理幻灯片
-		window.onload=function(){
-			addSliders();
-			switchSlider(1);
-			setTimeout(function(){
-				movePictures();
-			},100);
-		}
+			}
 </script>
 </body>
 </html>
