@@ -31,9 +31,9 @@
 		.slider .main .main-i img {
 			width: 100%;
 			position: absolute;
-			top: 50%;/*后期调整*/
+			top: 0;/*后期调整*/
 			left: 0;
-			z-index: 2;
+			z-index: 5;
 		}
 		.slider .main .main-i .caption {
 			position: absolute;
@@ -234,13 +234,12 @@
 			for (var i = 0; i < pictures.length; i++) {
 				pictures[i].style.marginTop=(-1*pictures[i].clientHeight/2)+'px';
 				}
-			pictures.style.top=0;
 		}
 	       //4.定义何时处理幻灯片
 		window.onload=function(){
 			setTimeout(function(){
 			   movePictures();
-			},100);
+			},50);
 			addSliders();
 			switchSlider(1);
 		}
