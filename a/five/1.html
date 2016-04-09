@@ -33,7 +33,7 @@
 			position: absolute;
 			top: 50%;/*后期调整*/
 			left: 0;
-			z-index: 1;
+			z-index: 8;
 		}
 		.slider .main .main-i .caption {
 			position: absolute;
@@ -232,7 +232,7 @@
 		function movePictures(){
 			var pictures=g('.picture');
 			for (var i = 0; i < pictures.length; i++) {
-				pictures[i].style.marginTop=((-1*pictures[i].clientHeight/2)-50+'%)+'px';
+				pictures[i].style.marginTop=(-1*pictures[i].clientHeight/2)+'px';
 				}
 		}
 	       //4.定义何时处理幻灯片
