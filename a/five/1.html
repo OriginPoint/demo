@@ -31,7 +31,7 @@
 		.slider .main .main-i img {
 			width: 100%;
 			position: absolute;
-			top: 50%;/*后期调整*/
+			top: 0;/*后期调整*/
 			left: 0;
 			z-index: 1;
 		}			
@@ -164,6 +164,9 @@
 	window.onload=function(){
 		addSliders();
 		switchSlider(1);
+		setTimeout(function(){
+		movePictures();
+		},100);
 	}
 	//1.定义数组
 	var data=[
