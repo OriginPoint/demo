@@ -35,9 +35,6 @@
 			left: 0;
 			z-index: 1;
 		}
-		.slider .main .main-i .picture{
-			top: 0;	/*github*/
-		}
 		.slider .main .main-i .caption {
 			position: absolute;
 			top: 30%;
@@ -235,7 +232,7 @@
 		function movePictures(){
 			var pictures=g('.picture');
 			for (var i = 0; i < pictures.length; i++) {
-				pictures[i].style.marginTop=(-1*pictures[i].clientHeight/2)+'px';
+				pictures[i].style.marginTop=(-1*pictures[i].clientHeight/2)+'px'-50+"%";
 				}
 		}
 	       //4.定义何时处理幻灯片
