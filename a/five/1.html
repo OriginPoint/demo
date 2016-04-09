@@ -36,7 +36,7 @@
 			z-index: 1;
 		}
 		.slider .main .main-i .picture{
-			top: 0;	
+			top: 0;	/*github*/
 		}
 		.slider .main .main-i .caption {
 			position: absolute;
@@ -163,14 +163,6 @@
 	</div>
 </div>
 <script>
-	//4.定义何时处理幻灯片
-	window.onload=function(){
-		addSliders();
-		switchSlider(1);
-		setTimeout(function(){
-		movePictures();
-		},10);
-	}
 	//1.定义数组
 	var data=[
 		{img:1,h1:'Creative',h2:'DUET'},
@@ -245,7 +237,15 @@
 			for (var i = 0; i < pictures.length; i++) {
 				pictures[i].style.marginTop=(-1*pictures[i].clientHeight/2)+'px';
 				}
-			}
+		}
+	       //4.定义何时处理幻灯片
+		window.onload=function(){
+			setTimeout(function(){
+			movePictures();
+			},10);
+			addSliders();
+			switchSlider(1);
+		}
 </script>
 </body>
 </html>
