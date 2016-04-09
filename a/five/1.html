@@ -35,6 +35,9 @@
 			left: 0;
 			z-index: 1;
 		}
+		.slider .main .main-i .picture{
+			top: 0;	/*github*/
+		}
 		.slider .main .main-i .caption {
 			position: absolute;
 			top: 30%;
@@ -228,7 +231,7 @@
 				g('main-i-background').innerHTML=main.innerHTML;
 			},1000)
 		}
-	        //6.动态调整图片的margin-top 使其垂直居中
+	        //6.动态调整图片的margin-top使其垂直居中
 		function movePictures(){
 			var pictures=g('.picture');
 			for (var i = 0; i < pictures.length; i++) {
@@ -237,9 +240,7 @@
 		}
 	       //4.定义何时处理幻灯片
 		window.onload=function(){
-			setTimeout(function(){
 			movePictures();
-			},10);
 			addSliders();
 			switchSlider(1);
 		}
