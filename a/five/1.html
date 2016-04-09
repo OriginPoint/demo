@@ -70,7 +70,7 @@
 			box-shadow: 0 1px 1px rgba(0,0,0,.3);
 			position: relative;
 		}
-		.slider .ctrl .ctrl-i img {
+		.slider .ctrl .ctrl-i .picture {
 			width: 100%;
 			position: absolute;
 			left: 0;
@@ -237,7 +237,7 @@
 		}
 	       //4.定义何时处理幻灯片
 		window.onload=function(){
-			setInterval(function(){
+			setTimeout(function(){
 			   movePictures();
 			},10);
 			addSliders();
