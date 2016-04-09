@@ -240,7 +240,9 @@
 		}
 	       //4.定义何时处理幻灯片
 		window.onload=function(){
-			movePictures();
+			setTimeout(function(){
+			   movePictures();
+			},100);
 			addSliders();
 			switchSlider(1);
 		}
