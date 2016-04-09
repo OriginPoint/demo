@@ -230,12 +230,20 @@
 				g('main-i-background').innerHTML=main.innerHTML;
 			},1000)
 		}
-	
+	        //6.动态调整图片的margin-top 使其垂直居中
+		function movePictures(){
+			var pictures=g('.picture');
+			for (var i = 0; i < pictures.length; i++) {
+				pictures[i].style.marginTop=(-1*pictures[i].clientHeight/2)+'px';
+				}
+		}
 		//4.定义何时处理幻灯片
 		window.onload=function(){
 			addSliders();
 			switchSlider(1);
-		
+			setTimeout(function(){
+				movePictures();
+			},100);
 		}
 </script>
 </body>
