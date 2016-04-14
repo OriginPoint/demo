@@ -14,7 +14,7 @@ window.onload=function(){
        {url:'a/two/1.html',title:'点击div,显示其内容'},
        {url:'a/two/2.html',title:'求出数组中所有数的和'},
        {url:'a/two/3.html',title:'函数传参，改变div任意属性值'},
-       {url:'a/two/4.html',title:'鼠标移入、移出改变图片透明度'},
+       {url:'a/two/4.html',title:'改变图片透明度'},
        {url:'a/two/5.html',title:'弹出层效果'}
        ],
        [{title:'第三课'},
