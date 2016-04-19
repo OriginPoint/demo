@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>星星闪烁特效</title>
+	<style type="text/css">
+		body{
+			margin: 0;
+			padding: 0;
+		}
+		div{
+			margin: 0 auto;
+		}
+		.box{
+			width: 1000px;
+			height: 800px;
+			margin-top: -400px;
+			margin-left: -500px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+		}
+		#canvas{
+			margin: 0 auto;
+			position: absolute;
+			left: 10%;
+			top: 10%;
+		}
+	</style>
+</head>
+<body>
+<div class="box">
+	<canvas id="canvas" width="800" height="600"></canvas>
+</div>
+	<script type="text/javascript" src="js/star.js"></script>
+	<script type="text/javascript">
+		var canv;
+		var ctx;
+		var w;//背景宽
+		var h;//背景高
+		var img=new Image();//图片
+		var starImg=new Image();//星星
+		var num=77;//星星数量
+		var starts=[];//开始位置
+		var lastTime;//星星刷新时间
+		var deltaTime;//时间间隔
+		var switchMouse;//鼠标
+		var life=0;//初始星星透明
+		window.onload=function(){			
+			init();
+		}
+		function init(){
+			canv=$("canvas");
+			ctx=canv.getContext("2d");
+			w=canv.width;
+			h=canv.height;
+			//事件监听
+			document.addEventListener("mousemove",mousemove,false);
+			img.src="img/star.jpg";
+			starImg.src="img/star.png"
+			for (var i = 0; i < num; i++) {
+				var obj=new starObj();
+				starts.push(obj);
+				starts[i].init();
+			}
+			lastTime=Date.now();//Date
+			gameLoop();//加载
+		}
+		//自定义id
+		function $(id){
+				return typeof id==="string"?document.getElementById(id):id;
+			}
+		//背景颜色
+		function drawBackground(){
+			ctx.fillStyle="#0D1925";
+			ctx.fillRect(0,0,w,h);
+		}
+		//循环调用 绘制背景
+		function gameLoop(){
+			window.requestAnimFrame(gameLoop);
+			//动态时间
+			var now=Date.now();
+			deltaTime=now-lastTime;
+			lastTime=now;
+			drawBackground();//绘制背景
+			drawImg();//绘制图片
+			drawStars();//绘制星星
+			aliveUpdate();//鼠标控制星星show and hidden
+		}
+		//绘制图片
+		function drawImg(){
+			ctx.drawImage(img,180,150,440,280);
+		}
+		//鼠标事件
+		function mousemove(e){
+			if (e.offsetX||e.layerX) {
+				var x=e.offsetX ==undefined?e.layerX:e.offsetX;
+				var y=e.offsetY ==undefined?e.layerY:e.offsetY;
+				//out switchMouse=false; in switchMouse=tru;
+				if (x > 100 && x < 620 && y > 150 && y <430) {
+					switchMouse=true;
+				}
+				else
+				{
+					switchMouse=false;
+				}
+			}
+		}
+		function aliveUpdate(){
+			if (switchMouse) {
+				//show stars
+				life += 0.03*deltaTime*0.05;
+				if (life>1) {
+					life=1;
+				}
+			}
+			else
+			{
+				//hidden stars
+				life -= 0.03*deltaTime*0.05;
+				if (life<0) {
+					life=0;
+				}
+			}
+		}
+	</script>
+</body>
+</html>
