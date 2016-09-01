@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>文字扫光</title>
+	<style>
+		.sample{
+			background-color: #0e1326;
+			padding-top: 30px;
+			overflow: hidden;
+		}
+		.blank-text{
+			position: relative;
+			width: 200px;
+			margin: 20px auto;
+			color: #fff;
+			line-height: ;
+			font-size: 50px;
+			font-size: 1.74074rem;
+			text-align: center;
+			overflow: hidden;
+			font-family: "Microsoft Yahei";
+		}
+		.blank-text:after{
+			width: 300%;
+			height: 100%;
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			background:-webkit-gradient(linear, left top, right top, color-stop(0, rgba(15,20,40, 0.7)), color-stop(0.4, rgba(15,20,40, 0.7)), color-stop(0.5, rgba(15,20,40, 0)), color-stop(0.6, rgba(15,20,40, 0.7)), color-stop(1, rgba(15,20,40, 0.7)));
+			-webkit-animation: slide ease-in-out 2s infinite;
+		}
+		@-webkit-keyframes slide{
+			0%{-webkit-transform:translateX(-66.666%);}
+			100%{-webkit-transform:translateX(0);}
+		}
+
+	</style>
+</head>
+<body>
+	<div class="sample">
+		<div class="blank-text">扫光测试demo</div>
+	</div>
+</body>
+</html>
