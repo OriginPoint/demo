@@ -42,7 +42,8 @@ window.onload=function(){
         {url:'a/six/3.html',title:'回到顶部'},
         {url:'a/six/4.html',title:'拖拽效果'},
         {url:'a/six/5.html',title:'焦点轮播图'},
-        {url:'a/six/7.html',title:'鼠标移入星星闪烁'}
+        {url:'a/six/7.html',title:'鼠标移入星星闪烁'},
+        {url:'a/six/index-0901.html',title:'文字扫光'}
        ]
   ];
   for(var i=0;i<data.length;i++){
